@@ -13,6 +13,7 @@ from keras import layers
 
 import warnings
 warnings.filterwarnings('ignore')
+file_path = 'Lung Cancer.csv'
 
 def explore_and_preprocess_data(file_path):
     """
@@ -50,8 +51,5 @@ def explore_and_preprocess_data(file_path):
 if __name__ == '__main__':
     csv_path = 'lung_cancer.csv' 
     cleaned_df = explore_and_preprocess_data(csv_path)
-
-   
-    
     X = cleaned_df.drop('LUNG_CANCER', axis=1)
     y = cleaned_df['LUNG_CANCER']
