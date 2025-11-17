@@ -1,10 +1,13 @@
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.metrics import classification_report, accuracy_score
+from torch import classes
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+import matplotlib.pyplot as plt
 
 def preprocess_data(file_path='Lung Cancer.csv'):
     """Loads and preprocesses the lung cancer dataset."""
@@ -51,6 +54,16 @@ def build_and_train_model(X_train, y_train, X_test, y_test):
     print("\n--- Evaluating Model ---")
     loss, accuracy = model.evaluate(X_test, y_test, verbose=0)
     print(f"Test Accuracy: {accuracy:.4f}")
+    history_df = pd.DataFrame(history.history)
+    history_df.loc[:,['accuracy','val_accuracy']].plot()
+    plt.show()
+
+    Y_pred = model.predict(Y_val)
+    Y_val = np.argmax(Y_val, axis=1)
+    Y_pred = np.argmax(Y_pred, axis=1)
+    print(metrics.classification_report(Y_val, Y_pred,
+                                        target_names=classes))
+    
     
    
     y_pred_prob = model.predict(X_test)
@@ -59,6 +72,9 @@ def build_and_train_model(X_train, y_train, X_test, y_test):
     print(classification_report(y_test, y_pred))
     
     return model, history
+    
+
+   
 
 if __name__ == '__main__':
     data = preprocess_data()
