@@ -19,5 +19,5 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def Lungs_cancer_detection:
-    path = 'lung-cancer-dataset.zip'
+    path = 'Lung_Cancer.csv'
 
