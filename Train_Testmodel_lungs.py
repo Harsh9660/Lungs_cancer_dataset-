@@ -8,7 +8,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 import matplotlib.pyplot as plt
-
+import metrics
 def preprocess_data(file_path='Lung Cancer.csv'):
     """Loads and preprocesses the lung cancer dataset."""
     df = pd.read_csv(file_path)
